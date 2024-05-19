@@ -1,0 +1,11 @@
+{
+    "name": "Iptv",
+    "alias": "iptv",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Iptv\\App\\Providers\\IptvServiceProvider"
+    ],
+    "files": []
+}
