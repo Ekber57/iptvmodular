@@ -1,17 +1,17 @@
 <?php
-namespace App\Actions\IpTv;
+namespace Modules\Iptv\App\Actions;
 
 use Exception;
 use App\Models\User;
-use App\DTOS\IpTv\UserDTO;
-use App\externalAPIs\IpTv\UserAPi;
+use Modules\Iptv\DTOS\UserDTO;
 use Illuminate\Support\Facades\DB;
-use App\externalAPIs\ipTv\GroupsAPI;
-use App\externalAPIs\IpTv\PackagesAPI;
-use App\Services\IpTv\PackageService;
-use App\Services\IpTv\ResellerService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Modules\Iptv\externalAPIs\UserAPi;
+use Modules\Iptv\externalAPIs\GroupsAPI;
+use Modules\Iptv\externalAPIs\PackagesAPI;
+use Modules\Iptv\App\Services\PackageService;
+use Modules\Iptv\App\Services\ResellerService;
 
 class ResellerEditActions {
     

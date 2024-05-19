@@ -1,11 +1,10 @@
 <?php
-namespace App\Actions\IpTv;
+namespace Modules\Iptv\App\Actions;
 
-use App\DTOS\IpTv\BouquetDTO;
+use Modules\Iptv\DTOS\BouquetDTO;
 
-use App\Services\IpTv\BouquetService;
-use App\externalAPIs\ipTv\BouquetsAPI;
-
+use Modules\Iptv\externalAPIs\BouquetsAPI;
+use Modules\Iptv\App\Services\BouquetService;
 
 
 class BouquetAction {

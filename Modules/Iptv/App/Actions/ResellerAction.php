@@ -1,28 +1,21 @@
 <?php
-namespace App\Actions\IpTv;
-
+namespace Modules\Iptv\App\Actions;
+use Modules\Iptv\externalAPIs\UserAPi;
 use Exception;
 use App\Models\User;
-use App\DTOS\UserDTO;
-
-use Illuminate\Http\Request;
-use App\DTOS\IpTv\PackageDTO;
-use App\Services\UserService;
-use App\DTOS\IpTv\ResellerDTO;
-use App\DTOS\IpTv\UserBindingDTO;
-use App\externalAPIs\IpTv\UserAPi;
-
 use Illuminate\Support\Facades\DB;
+use Modules\Auth\App\DTOS\UserDTO;
+use Modules\Iptv\DTOS\ResellerDTO;
 use Illuminate\Support\Facades\Auth;
-use App\Services\IpTv\PackageService;
-use Illuminate\Support\Facades\Crypt;
-use App\externalAPIs\IpTv\PackagesAPI;
-use App\Services\IpTv\CashbackService;
-use App\Services\IpTv\ResellerService;
-use App\DTOS\IpTv\UserDTO as IpTvUserDTO;
-use App\Services\IpTv\UserBindingService;
-use App\Http\Requests\IpTv\ResellerCreateRequest;
-use App\Http\Requests\IpTv\SubresellerCreateRequest;
+use Modules\Iptv\DTOS\UserBindingDTO;
+use Modules\Auth\App\Services\UserService;
+use Modules\Iptv\externalAPIs\PackagesAPI;
+use Modules\Iptv\App\Services\PackageService;
+use Modules\Iptv\App\Services\CashbackService;
+use Modules\Iptv\App\Services\ResellerService;
+use Modules\Iptv\App\Services\UserBindingService;
+use Modules\Iptv\App\Http\Requests\ResellerCreateRequest;
+use Modules\Iptv\App\Http\Requests\SubresellerCreateRequest;
 
 class ResellerAction {
     protected $userService;

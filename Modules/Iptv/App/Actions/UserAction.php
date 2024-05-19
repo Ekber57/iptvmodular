@@ -1,11 +1,9 @@
 <?php
-namespace App\Actions\IpTv;
-
-use App\DTOS\IpTv\UserDTO;
-use App\externalAPIs\IpTv\UserAPi;
-use App\Http\Requests\IpTv\ResellerCreateRequest;
-use App\Services\IpTv\UserBindingService;
+namespace Modules\Iptv\App\Actions;
+use Modules\Auth\App\DTOS\UserDTO;
 use Illuminate\Support\Facades\Auth;
+use Modules\Iptv\externalAPIs\UserAPi;
+use Modules\Iptv\App\Services\UserBindingService;
 
 class UserAction {
     protected $userAPi;

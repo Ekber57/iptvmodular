@@ -1,12 +1,11 @@
 <?php
-namespace App\Actions;
+namespace Modules\Iptv\Actions;
 
-use App\Actions\DashboardTraits\IpTv\LineTrait;
-use App\externalAPIs\IpTv\BaseNntvAPI;
+use Modules\Iptv\externalAPIs\BaseNntvAPI;
 
 class DashboardAction
 {
-    use LineTrait;
+    // use LineTrait;
     protected $api;
     public function __construct()
     {
@@ -14,7 +13,7 @@ class DashboardAction
     }
     public function index()
     {
-        return $this->lineIndex();
+        // return $this->lineIndex();
     }
 
 

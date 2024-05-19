@@ -1,12 +1,12 @@
 <?php
-namespace App\Actions\IpTv;
+namespace Modules\Iptv\App\Actions;
 
-use App\externalAPIs\IpTv\CustomAPI;
 use App\Models\User;
-use App\Services\IpTv\LineService;
-use App\Services\IpTv\ResellerService;
-use App\Services\IpTv\UserBindingService;
 use Illuminate\Support\Facades\Auth;
+use Modules\Iptv\externalAPIs\CustomAPI;
+use Modules\Iptv\App\Services\LineService;
+use Modules\Iptv\App\Services\ResellerService;
+use Modules\Iptv\App\Services\UserBindingService;
 
 class OnlineLineAction {
     protected $resellerService;
@@ -33,7 +33,7 @@ class OnlineLineAction {
     }
 
     public function getOnlineUsersFromXuiInterface() {
-        $remoteLineIds =$this->findLinesForReseller(Auth::user());
+        $remoteLineIds = $this->findLinesForReseller(Auth::user());
         // ddd($remoteLineIds);
         return $this->customAPI->getOnlineLines($remoteLineIds);
 

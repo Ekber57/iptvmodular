@@ -1,27 +1,29 @@
 <?php
-
-namespace App\Actions\IpTv;
+namespace Modules\Iptv\App\Actions;
 
 use Exception;
 use App\Models\User;
-use App\DTOS\UserDTO;
-
-use App\DTOS\IpTv\LineDTO;
-use App\Services\UserService;
-use App\DTOS\IpTv\CashbackDTO;
-use App\DTOS\IpTv\UserBindingDTO;
-use App\Models\IpTv\ResellerTree;
-use App\Services\IpTv\LineService;
+use Illuminate\Support\Carbon;
+use Modules\Iptv\DTOS\LineDTO;
 use Illuminate\Support\Facades\DB;
-use App\externalAPIs\ipTv\LinesAPI;
+use Modules\Auth\App\DTOS\UserDTO;
+use Modules\Iptv\DTOS\CashbackDTO;
 use Illuminate\Support\Facades\Auth;
-use App\Services\IpTv\PackageService;
 use Illuminate\Support\Facades\Crypt;
-use App\externalAPIs\IpTv\PackagesAPI;
-use App\Services\IpTv\CashbackService;
-use App\Services\IpTv\UserBindingService;
-use App\Http\Requests\IpTv\LineCreateRequest;
-use Carbon\Carbon;
+use Modules\Iptv\DTOS\UserBindingDTO;
+use Modules\Iptv\Models\ResellerTree;
+use Modules\Iptv\externalAPIs\LinesAPI;
+use Modules\Auth\App\Services\UserService;
+use Modules\Iptv\App\Services\LineService;
+use Modules\Iptv\externalAPIs\PackagesAPI;
+use Modules\Iptv\App\Services\PackageService;
+use Modules\Iptv\App\Services\CashbackService;
+use Modules\Iptv\App\Services\UserBindingService;
+use Modules\Iptv\App\Http\Requests\LineCreateRequest;
+
+
+
+
 
 class LineAction
 {

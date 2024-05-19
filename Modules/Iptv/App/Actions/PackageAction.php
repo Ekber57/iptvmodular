@@ -1,14 +1,13 @@
 <?php
-
-namespace App\Actions\IpTv;
+namespace Modules\Iptv\App\Actions;
 
 use App\Models\User;
-use App\DTOS\IpTv\PackageDTO;
 use Illuminate\Support\Facades\Auth;
-use App\Services\IpTv\PackageService;
-use App\externalAPIs\IpTv\PackagesAPI;
-use App\Models\IpTv\ResellerTree;
-use App\Services\IpTv\ResellerService;
+use Modules\Iptv\Models\ResellerTree;
+use Modules\Iptv\externalAPIs\PackagesAPI;
+use Modules\Iptv\App\Services\PackageService;
+use Modules\Iptv\App\Services\ResellerService;
+
 
 class PackageAction
 {
