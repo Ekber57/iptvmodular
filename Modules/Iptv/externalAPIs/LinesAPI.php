@@ -39,6 +39,10 @@ class LinesAPI extends BaseNntvAPI
         $data = $this->getData($url);
     }
 
+    public function editLine(LineDTO $lineDTO) {
+
+    }
+
 
 
 

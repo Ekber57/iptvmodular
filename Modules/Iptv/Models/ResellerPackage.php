@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ResellerPackage extends Model
 {
     use HasFactory;
+    protected $table = 'iptvmodule_reseller_packages';
     protected $fillable= [
         'package_name',
         'original_package_id',

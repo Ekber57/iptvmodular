@@ -15,7 +15,7 @@ class BaseNntvAPI
         $apiKey = env("nnvtApiKey");
         $accessCode = env("nnTvaccessCode");
         $serverUrl = "nntv.eu.org/";
-        // $serverUrl = "https://nntv.eu.org";
+    
         $this->baseUrl = $serverUrl . "/" . $accessCode . "/?" . "api_key=" . $apiKey . "&" . "action=";
     }
 

@@ -11,17 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('iptvmodule_bouquets', function (Blueprint $table) {
             $table->id();
+            $table->string('bouquet_id');
             $table->string('name');
-            $table->string('username');
-            $table->string('phone');
-            $table->string('email')->unique();
-            $table->float("balance",100,2);
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            // $table->smallInteger("status");
-            $table->rememberToken();
+            $table->json('channels');
+            $table->json('movies');
+            $table->json('radios');
+            $table->json('series');
+            $table->string('order');
             $table->timestamps();
         });
     }
@@ -31,7 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('bouquets');
     }
 };
-;

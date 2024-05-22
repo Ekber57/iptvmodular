@@ -14,24 +14,24 @@ use Modules\Iptv\App\Http\Requests\SubresellerCreateRequest;
 
 class ResellerController extends Controller {
     public function createSubreseller(PackageAction $packageAction,ResellerService $resellerService) {
-        return view("create_subreseller",["packages" => $packageAction->getResellerPackages(Auth::user())]);
+        return view("iptv::create_subreseller",["packages" => $packageAction->getResellerPackages(Auth::user())]);
     }
     public function createReseller(ResellerAction $resellerAction,ResellerService $resellerService,GroupsAPI $groupsAPI) {
-        return view("create_reseller",["groups" => $groupsAPI->getGroups()]);
+        return view("iptv::create_reseller",["groups" => $groupsAPI->getGroups()]);
     }
 
 
     public function getResellers(ResellerAction $resellerAction) {
         $this->authorize("create reseller");
 
-        return view("resellers",[
+        return view("iptv::resellers",[
             "users" => $resellerAction->getResellers()
         ]);
     }
 
     public function getSubresellers(ResellerAction $resellerAction) {
         $this->authorize("create subreseller");
-        return view("subresellers",[
+        return view("iptv::subresellers",[
             "users" => $resellerAction->getSubresellers()
         ]);
     }

@@ -1,6 +1,7 @@
 <?php
 namespace Modules\Iptv\App\Actions;
-use Modules\Auth\App\DTOS\UserDTO;
+
+use Modules\Iptv\DTOS\UserDTO;
 use Illuminate\Support\Facades\Auth;
 use Modules\Iptv\externalAPIs\UserAPi;
 use Modules\Iptv\App\Services\UserBindingService;

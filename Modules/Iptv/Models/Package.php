@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 class Package extends Model
 {
     use HasFactory;
+    protected $table = 'iptvmodule_packages';
     protected $fillable= [
         'package_name',
         'original_package_id',

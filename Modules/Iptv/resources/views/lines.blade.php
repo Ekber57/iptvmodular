@@ -1,4 +1,4 @@
-@extends("app")
+@extends("iptv::app")
 
 @section("content")
 <div class="col-md-12 col-lg-12">

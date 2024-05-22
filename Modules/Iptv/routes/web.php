@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Modules\Iptv\App\Actions\LineAction;
 use Modules\Iptv\App\Services\LineService;
@@ -38,10 +40,9 @@ Route::group([], function () {
     Route::get("/dashboard",function(OnlineLineAction $onlineLineAction,LineAction $lineAction, LineService $lineService) {
     $user = Auth::user();
     $lineAction->getWillExpiredLines();
-    // exit();
         if($user->hasPermissionTo("create line")) {
             // print_r($onlineLineAction->getOnlineUsersFromXuiInterface());
-            return view("resellerdashboard",[
+            return view("iptv::resellerdashboard",[
                 "connections_count" => count($onlineLineAction->getOnlineUsersFromXuiInterface()),
                 "lines" => $lineAction->getWillExpiredLines()
             ]);
@@ -84,7 +85,28 @@ Route::group([], function () {
         return (new UserAction())->showUsers();
     });
     
+
+
+
+    Route::get("/profile",function(User $user){
+        $currentUser  = Auth::user();
+            return view("iptv::profile",["user" => $currentUser]);
+    });
     
+
+    
+    // Route::get("/profile/{user}",function(User $user){
+    //     $currentUser  = Auth::user();
+    //     if($currentUser->hasPermissionTo("create line")) {
+    //         return view("iptv::profile",["user" => $curr]);
+    //     }
+    //     else if($user->id == $currentUser->user) {
+
+    //     }
+    //     else {
+    //         return redirect()->route("signin");
+    //     }
+    // });
     
     // reseller
     

@@ -34,11 +34,11 @@ class ResellerEditActions {
     }
 
     public function editReseller($user) {
-        return view("edit_reseller",["user" => $user, "groups" => $this->groupsAPI->getGroups()]);
+        return view("iptv::edit_reseller",["user" => $user, "groups" => $this->groupsAPI->getGroups()]);
     }
 
     public function editSubreseller($user) {
-        return view("edit_subreseller",["user" => $user, "packages" => $this->packageAction->filterTrialPackages( $this->packagesAPI->getPackages()), "custom_packages" => $this->packageService->getPackages($user)]);
+        return view("iptv::edit_subreseller",["user" => $user, "packages" => $this->packageAction->filterTrialPackages( $this->packagesAPI->getPackages()), "custom_packages" => $this->packageService->getPackages($user)]);
     }
     
 

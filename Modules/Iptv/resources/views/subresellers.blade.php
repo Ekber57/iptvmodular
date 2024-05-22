@@ -1,4 +1,4 @@
-@extends("app")
+@extends("iptv::app")
 {{-- @section('panel_name')
 Reseller List
 @endsection --}}
@@ -64,7 +64,7 @@ Reseller List
     </div>
     </div>
 
-    {{$users->links('helper.paginator')}}
+    {{$users->links('iptv::helper.paginator')}}
 
 <script>
 function editUser(userId) {

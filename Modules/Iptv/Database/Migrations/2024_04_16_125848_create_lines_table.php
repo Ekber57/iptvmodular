@@ -11,10 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('otpmodule_otpcodes', function (Blueprint $table) {
+        Schema::create('iptvmodule_lines', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger("owner_id");
             $table->unsignedBigInteger("user_id");
-            $table->integer("code");
+            $table->unsignedBigInteger("package_id");
+            $table->string("package_name");
+            $table->string("username");
+            $table->string("password");
+            $table->json("bouquets");
+            $table->dateTime("exp_date");
             $table->smallInteger("status");
             $table->timestamps();
         });
@@ -25,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('otpcodes');
+        Schema::dropIfExists('lines');
     }
 };

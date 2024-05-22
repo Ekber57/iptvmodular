@@ -56,8 +56,8 @@ class UserAPi extends BaseNntvAPI {
    $this->baseUrl = $this->baseUrl."create_user&".$queryString;
 
         $data =  $this->getData($this->baseUrl);
-     
-        if($data["status"] == "STATUS_EXISTS_USERNAME") {
+        if($data["status"] != "STATUS_SUCCESS") {
+
             throw new Exception("XUI add user  FAIlED");
         }
         return $data;

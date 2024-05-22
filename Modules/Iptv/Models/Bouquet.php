@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Bouquet extends Model
 {
     use HasFactory;
+    protected $table = 'iptvmodule_bouquets';
     protected $fillable = [
         'bouquet_id',
         'name',

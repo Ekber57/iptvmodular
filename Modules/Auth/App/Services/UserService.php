@@ -2,7 +2,7 @@
 namespace Modules\Auth\App\Services;
 
 use App\Models\User;
-
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Modules\Auth\App\DTOS\UserDTO;
@@ -16,7 +16,7 @@ class UserService
             'name' => $userDTO->name,
             'username' => $userDTO->username,
             'email' => $userDTO->email,
-            'password' => Hash::make($userDTO->password),
+            'password' => Crypt::encrypt($userDTO->password),
             'phone' => $userDTO->phone,
             'balance' => $userDTO->balance,
         ]);
@@ -70,6 +70,10 @@ class UserService
         $user->save();
         return $user;
 
+    }
+
+    public function getUserById($id) {
+        return User::find($id);
     }
 
 }

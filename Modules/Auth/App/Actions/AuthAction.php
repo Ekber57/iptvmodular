@@ -5,8 +5,8 @@ use GuzzleHttp\Client;
 use App\Events\UserRegisterEvent;
 use Modules\Auth\App\DTOS\UserDTO;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Log;
 use Modules\Auth\App\Services\UserService;
 use Modules\Auth\App\Http\Requests\SignInRequest;
 use Modules\Auth\App\Http\Requests\RegisterRequest;
@@ -46,11 +46,11 @@ class AuthAction
         $userDTO = new UserDTO();
         $userDTO->password = $request->password;
         $userDTO->username = $request->username;
-
+      
         $user = $this->userService->getUserWithCridential($userDTO);
 
         if (!is_null($user)) {
-            if (Hash::check($request->password, $user->password)) {
+            if ($this->checkPassword(request()->password,$user)) {
                 Auth::login($user);
                 return redirect("/dashboard");
             } else {
@@ -89,5 +89,13 @@ class AuthAction
         }
     }
 
-
+    private function checkPassword($password,$user) {
+        
+        if($password === Crypt::decrypt($user->password)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }

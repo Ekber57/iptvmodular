@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Line extends Model
 {
     use HasFactory;
+    protected $table = 'iptvmodule_lines';
     protected $fillable = [
         "user_id",
         "exp_date",

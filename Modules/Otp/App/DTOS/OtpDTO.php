@@ -7,6 +7,8 @@ class OtpDTO
     public $userId;
     public $code;
     public $status;
+    public $email;
+    public $number;
 }
 
 

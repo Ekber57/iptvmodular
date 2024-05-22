@@ -29,6 +29,9 @@ class PasswordAction {
             $otpDTO = new OtpDTO();
             $otpDTO->userId = $user->id;
             $otpDTO->code = mt_rand(100000, 999999);
+            $otpDTO->number = $user->phone;
+            $otpDTO->email = $user->email;
+
             $this->otpSevice->sendOTP($otpDTO);
             return redirect("/passreset?token=".$token);
         }

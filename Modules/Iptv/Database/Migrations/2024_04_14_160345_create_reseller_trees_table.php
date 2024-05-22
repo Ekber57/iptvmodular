@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('otpmodule_otpcodes', function (Blueprint $table) {
+        Schema::create('iptvmodule_reseller_trees', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("user_id");
-            $table->integer("code");
-            $table->smallInteger("status");
+            $table->bigInteger("parent");
+            $table->bigInteger("child");
             $table->timestamps();
         });
     }
@@ -25,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('otpcodes');
+        Schema::dropIfExists('reseller_trees');
     }
 };
