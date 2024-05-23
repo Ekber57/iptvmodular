@@ -1,4 +1,4 @@
-@extends("app")
+@extends("iptv::app")
 @section('panel_name')
 Reseller List
 @endsection

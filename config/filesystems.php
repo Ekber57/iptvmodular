@@ -36,6 +36,14 @@ return [
             'throw' => false,
         ],
 
+        'payment' => [
+            'driver' => 'local',
+            'root' => storage_path('public/system/paymentmodule/checks'),
+            'throw' => false,
+            'visibility' => 'public',
+        ],
+
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),

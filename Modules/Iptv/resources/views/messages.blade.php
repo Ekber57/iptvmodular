@@ -1,4 +1,4 @@
-@extends("app")
+@extends("iptv::app")
 @section("content")
 <div class="table-responsive">
     <table class="table table-hover mb-0">

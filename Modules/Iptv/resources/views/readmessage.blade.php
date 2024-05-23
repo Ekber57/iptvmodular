@@ -1,4 +1,4 @@
-@extends("app")
+@extends("iptv::app")
 @section("content")
 <div class="card-body">
 

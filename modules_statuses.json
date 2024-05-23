@@ -1,5 +1,6 @@
 {
     "Iptv": true,
     "Auth": true,
-    "Otp": true
+    "Otp": true,
+    "Payment": true
 }
