@@ -1,3 +1,9 @@
+@php
+    $hasUnreaded = false;
+    $authId = Auth::user()->id;
+    $notifications = new \Modules\Notification\App\Services\NotificationService;
+    $notifications = $notifications->getNotifications($authId);
+@endphp
 <!-- Page Header Start -->
             <!--================================-->
             <div class="page-header">
@@ -65,7 +71,17 @@
                          <li class="list-inline-item dropdown hidden-xs">
                             <a class=" notification-icon" href="" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i data-feather="bell" class="wd-20"></i>
+                            @foreach ($notifications  as $notification)
+                                @php
+                                   if($notification->status == 0) {
+                                    $hasUnreaded = true;
+                                   }
+                                @endphp
+                            @endforeach
+                            @if ($hasUnreaded)
                             <span class="notification-count wave in"></span>
+                            @endif
+                            
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
                                <!-- Top Notifications Area -->
@@ -78,104 +94,46 @@
                                      <span>5+ New Notifications</span>
                                   </div>
                                   <div class="notifications-box" id="notificationsBox">
-                                     <a class="dropdown-item list-group-item" href="">
-                                        <div class="d-flex justify-content-between">
-                                           <div class="wd-35 ht-35 mg-r-10 d-flex align-items-center justify-content-center rounded-circle card-icon-success">
-                                              <i data-feather="smile" class="wd-20"></i>
-                                           </div>
-                                        </div>
-                                        <div class="wd-100p">
-                                           <div class="d-flex justify-content-between">
-                                              <h3 class="tx-13 tx-semibold mb-0">Your order is placed</h3>
-                                              <span class="small tx-gray-500 ft-right">Mar 15, 12:32pm</span>
-                                           </div>
-                                           <div class="tx-gray-700">System reboot has been successfully completed</div>
-                                        </div>
-                                     </a>
-                                     <a class="dropdown-item list-group-item" href="">
-                                        <div class="d-flex justify-content-between">
-                                           <div class="wd-35 ht-35 mg-r-10 d-flex align-items-center justify-content-center rounded-circle card-icon-warning">
-                                              <i data-feather="bell" class="wd-20"></i>
-                                           </div>
-                                        </div>
-                                        <div class="wd-100p">
-                                           <div class="d-flex justify-content-between">
-                                              <h3 class="tx-13 tx-semibold mb-0">Document available</h3>
-                                              <span class="small tx-gray-500 ft-right">Mar 15, 12:32pm</span>
-                                           </div>
-                                           <div class="tx-gray-700">New user feedback received</div>
-                                        </div>
-                                     </a>
-                                     <a class="dropdown-item list-group-item" href="">
-                                        <div class="d-flex justify-content-between">
-                                           <div class="wd-35 ht-35 mg-r-10 d-flex align-items-center justify-content-center rounded-circle card-icon-success">
-                                              <i data-feather="check-circle" class="wd-20"></i>
-                                           </div>
-                                        </div>
-                                        <div class="wd-100p">
-                                           <div class="d-flex justify-content-between">
-                                              <h3 class="tx-13 tx-semibold mb-0">Payment failed!</h3>
-                                              <span class="small tx-gray-500 ft-right">Mar 15, 12:32pm</span>
-                                           </div>
-                                           <div class="tx-gray-700">New file has been uploaded</div>
-                                        </div>
-                                     </a>
-                                     <a class="dropdown-item list-group-item" href="">
-                                        <div class="d-flex justify-content-between">
-                                           <div class="wd-35 ht-35 mg-r-10 d-flex align-items-center justify-content-center rounded-circle card-icon-primary">
-                                              <i data-feather="info" class="wd-20"></i>
-                                           </div>
-                                        </div>
-                                        <div class="wd-100p">
-                                           <div class="d-flex justify-content-between">
-                                              <h3 class="tx-13 tx-semibold mb-0">Document available</h3>
-                                              <span class="small tx-gray-500 ft-right">Mar 15, 12:32pm</span>
-                                           </div>
-                                           <div class="tx-gray-700">New order has been received</div>
-                                        </div>
-                                     </a>
-                                     <a class="dropdown-item list-group-item" href="">
-                                        <div class="d-flex justify-content-between">
-                                           <div class="wd-35 ht-35 mg-r-10 d-flex align-items-center justify-content-center rounded-circle card-icon-primary">
-                                              <i data-feather="info" class="wd-20"></i>
-                                           </div>
-                                        </div>
-                                        <div class="wd-100p">
-                                           <div class="d-flex justify-content-between">
-                                              <h3 class="tx-13 tx-semibold mb-0">New order available</h3>
-                                              <span class="small tx-gray-500 ft-right">Mar 15, 12:32pm</span>
-                                           </div>
-                                           <div class="tx-gray-700">New order has been received</div>
-                                        </div>
-                                     </a>
-                                     <a class="dropdown-item list-group-item" href="">
-                                        <div class="d-flex justify-content-between">
-                                           <div class="wd-35 ht-35 mg-r-10 d-flex align-items-center justify-content-center rounded-circle card-icon-success">
-                                              <i data-feather="smile" class="wd-20"></i>
-                                           </div>
-                                        </div>
-                                        <div class="wd-100p">
-                                           <div class="d-flex justify-content-between">
-                                              <h3 class="tx-13 tx-semibold mb-0">Your order is placed</h3>
-                                              <span class="small tx-gray-500 ft-right">Mar 15, 12:32pm</span>
-                                           </div>
-                                           <div class="tx-gray-700">System reboot has been successfully completed</div>
-                                        </div>
-                                     </a>
-                                     <a class="dropdown-item list-group-item" href="">
-                                        <div class="d-flex justify-content-between">
-                                           <div class="wd-35 ht-35 mg-r-10 d-flex align-items-center justify-content-center rounded-circle card-icon-warning">
-                                              <i data-feather="bell" class="wd-20"></i>
-                                           </div>
-                                        </div>
-                                        <div class="wd-100p">
-                                           <div class="d-flex justify-content-between">
-                                              <h3 class="tx-13 tx-semibold mb-0">Document available</h3>
-                                              <span class="small tx-gray-500 ft-right">Mar 15, 12:32pm</span>
-                                           </div>
-                                           <div class="tx-gray-700">New user feedback received</div>
-                                        </div>
-                                     </a>
+                                  
+                                    @foreach ($notifications as $notification)
+                                    @if ($notification ->status == 0)
+                              
+                                    <a class="dropdown-item list-group-item" href="/read_notification/{{$notification->id}}">
+                                       <div class="d-flex justify-content-between">
+                                          <div class="wd-35 ht-35 mg-r-10 d-flex align-items-center justify-content-center rounded-circle card-icon-warning">
+                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell wd-20"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                                          </div>
+                                       </div>
+                                       <div class="wd-100p">
+                                          <div class="d-flex justify-content-between">
+                                             <h3 class="tx-13 tx-semibold mb-0">{{$notification->title}}</h3>
+                                             <span class="small tx-gray-500 ft-right">Mar 15, 12:32pm</span>
+                                          </div>
+                                          <div class="tx-gray-700">{{substr($notification->content,0,40)}}</div>
+                                       </div>
+                                    </a>
+                                    @else
+                                    <a class="dropdown-item list-group-item" href="/read_notification/{{$notification->id}}">
+                                       <div class="d-flex justify-content-between">
+                                          <div class="wd-35 ht-35 mg-r-10 d-flex align-items-center justify-content-center rounded-circle card-icon-success">
+                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle wd-20"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                                          </div>
+                                       </div>
+                                       <div class="wd-100p">
+                                          <div class="d-flex justify-content-between">
+                                             <h3 class="tx-13 tx-semibold mb-0">{{$notification->title}}</h3>
+                                             <span class="small tx-gray-500 ft-right">Mar 15, 12:32pm</span>
+                                          </div>
+                                          <div class="tx-gray-700">{{substr($notification->content,0,40)}}</div>
+                                       </div>
+                                    </a>
+                                    @endif
+                                        
+                                    @endforeach
+                                
+                                  
+                                 
+                             
                                   </div>
                                   <div class="notifications-footer">
                                      <a href="">View all Notifications</a>

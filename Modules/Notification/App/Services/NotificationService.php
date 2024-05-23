@@ -12,5 +12,19 @@ class NotificationService {
             'status' => 0
         ]);
     }
+
+    public function getNotifications($userId) {
+        return  Notification::where("user_id",$userId)->orderBy('id', 'desc')->limit(10)->get();
+    }
+    public function readNotification($notificationId) {
+        $notification = Notification::find($notificationId);
+        $notification->status = 1;
+        $notification->save();
+        return $notification;
+    }
+
+    public function getAll($userId) {
+        return  Notification::where("user_id",$userId)->orderBy('id', 'desc')->paginate(2);
+    }
 }
 ?>

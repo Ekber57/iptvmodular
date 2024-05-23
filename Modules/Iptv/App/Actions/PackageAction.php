@@ -35,6 +35,7 @@ class PackageAction
         } else {
 
             return view("iptv::packages", [
+              
                 "packages" => array_filter($this->packageService->getPackages(Auth::user()), array($this, "trimPackgeName")),
                 "custom_packages" => $this->resellerService->getResellerPackages(Auth::user())
 
@@ -158,7 +159,6 @@ class PackageAction
 
             ]);
         } else {
-
             return view("iptv::packages", [
                 "packages" => array_filter($this->packageService->getPackages(Auth::user()), array($this, "trimPackgeName")),
                 "custom_packages" => $this->resellerService->getResellerPackages(Auth::user())
