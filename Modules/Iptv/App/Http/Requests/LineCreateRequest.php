@@ -1,6 +1,8 @@
 <?php
 namespace Modules\Iptv\App\Http\Requests;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Foundation\Http\FormRequest;
 
 
@@ -34,13 +36,15 @@ class LineCreateRequest extends FormRequest
                         return $decodedPrice;
                     }
                 } catch (\Throwable $th) {
+                    // throw $th;
                     $fail("Paket secilmeyib");
+
                 }
             }],
             'package_name' => 'string|required',
             'phone' => 'required|string|unique:users,phone|max:10|min:10',
             'password' => 'required',
-            'username' => 'required|unique:lines,username|string|min:5|max:50',
+            'username' => 'required|unique:iptvmodule_lines,username|string|min:5|max:50',
             'package_id' => 'required|numeric|min:1|max:10000',
             'bouquets_selected.*' => 'required'
         ];

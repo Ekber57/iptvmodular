@@ -11,7 +11,7 @@ class UserRegisterListener
      */
     public function __construct()
     {
-        //
+        
     }
 
     /**

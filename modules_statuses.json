@@ -2,5 +2,6 @@
     "Iptv": true,
     "Auth": true,
     "Otp": true,
-    "Payment": true
+    "Payment": true,
+    "Notification": true
 }

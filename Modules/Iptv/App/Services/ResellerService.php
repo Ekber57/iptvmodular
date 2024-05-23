@@ -7,6 +7,7 @@ use Modules\Iptv\Models\Reseller;
 use Modules\Iptv\DTOS\ResellerDTO;
 use Modules\Iptv\Models\ResellerTree;
 use Modules\Iptv\Models\ResellerPackage;
+use Modules\Iptv\Models\UserTree;
 
 class ResellerService {
     public function addReseller(ResellerDTO $resellerDTO)  {
@@ -16,6 +17,8 @@ class ResellerService {
         ]);
     }
     public function addSubreseller(ResellerDTO $resellerDTO)  {
+        $this->addUserTree($resellerDTO->parent,$resellerDTO->child);
+
      return   ResellerTree::create([
             'parent' => $resellerDTO->parent,
             'child' => $resellerDTO->child
@@ -80,6 +83,13 @@ class ResellerService {
 
     public function getGroupId(User $user) {
         return Reseller::where("user_id","=",$user->id)->first()->group_id;
+    }
+
+    public function addUserTree($parent,$child) {
+        return UserTree::create([
+            'parent' => $parent,
+            'child' => $child
+        ]);
     }
 
 

@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Events\ManualPaymentRequestEvent;
 use App\Events\UserRegisterEvent;
+use App\Listeners\SendNotificationListener;
 use App\Listeners\UserRegisterListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -22,7 +24,8 @@ class EventServiceProvider extends ServiceProvider
         ],
         UserRegisterEvent::class => [
             UserRegisterListener::class
-        ]
+        ],
+        ManualPaymentRequestEvent::class => [SendNotificationListener::class]
     ];
 
     /**

@@ -5,6 +5,7 @@ use App\Models\User;
 use Modules\Iptv\Models\Line;
 use Illuminate\Support\Carbon;
 use Modules\Iptv\DTOS\LineDTO;
+use Modules\Iptv\Models\UserTree;
 
 class LineService {
     public function addLine(LineDTO $nntvLineDTO) {
@@ -19,12 +20,17 @@ class LineService {
             "exp_date" => $nntvLineDTO->expDate,
             "status" => 0
         ]);
+
+        UserTree::create([
+            'parent' => $nntvLineDTO->ownerId,
+            'child' => $nntvLineDTO->userId
+        ]);
     }
 
     public function getLinesForUser(User $user) {
-        return User::join("lines","lines.owner_id","=","users.id")->select(["users.username as owner","users.id as uid","lines.*"])->get();
+        return User::join("iptvmodule_lines","iptvmodule_lines.owner_id","=","users.id")->select(["users.username as owner","users.id as uid","iptvmodule_lines.*"])->get();
     }
-
+ 
     public function createEmptyLine(User $user) {
         Line::create([
             "user_id" => $user->id,
@@ -57,6 +63,10 @@ class LineService {
 
     public function getLine(User $user) {
         return Line::where("user_id","=",$user->id)->first();
+    }
+
+    public function getParent(User $user) {
+        return UserTree::where('child',$user->id)->first();
     }
 }
 
