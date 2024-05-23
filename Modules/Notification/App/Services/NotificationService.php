@@ -1,7 +1,7 @@
 <?php
 namespace Modules\Notification\App\Services;
+use Modules\Notification\Models\Notification;
 use Modules\Notification\DTOS\NotificationDTO;
-use Notification;
 
 class NotificationService {
     public function add(NotificationDTO $notificationDTO) {

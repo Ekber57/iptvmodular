@@ -2,14 +2,13 @@
 
 namespace App\Providers;
 
-use App\Events\ManualPaymentRequestEvent;
 use App\Events\UserRegisterEvent;
-use App\Listeners\SendNotificationListener;
-use App\Listeners\UserRegisterListener;
 use Illuminate\Auth\Events\Registered;
+use App\Listeners\UserRegisterListener;
+use App\Events\ManualPaymentRequestEvent;
+use App\Listeners\SendNotificationWhenManualPaymentListener;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -25,7 +24,7 @@ class EventServiceProvider extends ServiceProvider
         UserRegisterEvent::class => [
             UserRegisterListener::class
         ],
-        ManualPaymentRequestEvent::class => [SendNotificationListener::class]
+        ManualPaymentRequestEvent::class => [SendNotificationWhenManualPaymentListener::class]
     ];
 
     /**

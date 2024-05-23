@@ -34,7 +34,7 @@ class ManualPaymentAction {
             return redirect()->route('manual_payment')->with(['data' => 'payment request sent successfully']);
             //code...
         } catch (\Throwable $th) {
-            ddd("d");
+         throw $th;
             DB::rollBack();
             return back()->with(['error' => 'Payment request not approved due to system error']);
         }
