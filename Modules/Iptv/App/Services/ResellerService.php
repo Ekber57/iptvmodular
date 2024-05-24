@@ -13,6 +13,7 @@ class ResellerService
 {
     public function addReseller(ResellerDTO $resellerDTO)
     {
+        $this->addUserTree(1, $resellerDTO->child);
         return Reseller::create([
             'user_id' => $resellerDTO->child,
             'group_id' => $resellerDTO->groupId

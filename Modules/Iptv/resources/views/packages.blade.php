@@ -1,5 +1,4 @@
-@extends("iptv::app")
-
+@extends('mainviews.app')
 @section("content")
 <div class="col-md-12 col-lg-12">
     <div class="card mg-b-30">

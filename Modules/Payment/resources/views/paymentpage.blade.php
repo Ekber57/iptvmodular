@@ -47,19 +47,19 @@
                     @csrf
                 <div class="row">
                     <div class="col-md-6 mg-b-15">
-                        <input disabled value=" KAPITALBANK: 0000 0000 00000" class="form-control form-control-sm" placeholder="Input box"
+                        <input disabled value=" {{$bankdetails->bank_name}}: {{$bankdetails->card_number}}" class="form-control form-control-sm" placeholder="Input box"
                             type="text">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6 mg-b-15">
-                        <input disabled value="Satici: Suleymanov Mesdan Fifi" class="form-control form-control-sm" placeholder="Input box"
+                        <input disabled value="{{$bankdetails->customer}}" class="form-control form-control-sm" placeholder="Input box"
                             type="text">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6 mg-b-15">
-                        <input disabled value="Musteri: Nermin" class="form-control form-control-sm" placeholder="Input box"
+                        <input disabled value="Musteri: {{$customer->name}}" class="form-control form-control-sm" placeholder="Input box"
                             type="text">
                     </div>
                 </div>

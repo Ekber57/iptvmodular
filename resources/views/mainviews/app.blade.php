@@ -28,13 +28,13 @@
       <!--================================-->
       <div class="page-container">
          <!--================================-->
-       @include('iptv::sidebar')
+       @include('mainviews.sidebar')
          <!--================================-->
          <!-- Page Content Start -->
          <!--================================-->
          <div class="page-content">
             <!--================================-->
-            @include('iptv::topbar')  
+            @include('mainviews.topbar')  
             <!--================================-->
             <!-- Page Inner Start -->
             <!--================================-->
@@ -42,7 +42,7 @@
                <!-- Wrapper -->
                <div class="wrapper">
                   <!--================================-->
-                 @include('iptv::breadcrumb')
+                 @include('mainviews.breadcrumb')
                   <!--================================-->
                   <!-- Form Layout Start -->
                   <!--================================-->				  

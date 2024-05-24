@@ -251,7 +251,7 @@
                                      </a>
                                   </div>
                                   <div class="top-message-footer">
-                                     <a href="">View all Messages</a>
+                                     <a href="/notifications">View all Messages</a>
                                   </div>
                                </div>
                             </div>

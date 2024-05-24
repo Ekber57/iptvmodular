@@ -1,4 +1,4 @@
-@extends("iptv::app")
+@extends('mainviews.app')
 @section("content")
 <div class="page-inner pd-0-force">
     <div class="bg-white mg-b-30">

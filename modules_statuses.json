@@ -3,5 +3,6 @@
     "Auth": true,
     "Otp": true,
     "Payment": true,
-    "Notification": true
+    "Notification": true,
+    "User": true
 }
