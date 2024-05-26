@@ -5,7 +5,9 @@
     "keywords": [],
     "priority": 0,
     "providers": [
-        "Modules\\Iptv\\App\\Providers\\IptvServiceProvider"
+        "Modules\\Iptv\\App\\Providers\\IptvServiceProvider",
+        "Modules\\Iptv\\App\\Providers\\EventServiceProvider"
+        
     ],
     "files": []
 }

@@ -4,5 +4,7 @@
     "Otp": true,
     "Payment": true,
     "Notification": true,
-    "User": true
+    "User": true,
+    "Settings": true,
+    "WhatsappNotification": true
 }

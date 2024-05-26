@@ -1,6 +1,7 @@
 <?php 
 namespace Modules\Otp\App\ExternalAPIS;
 
+
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Log;
 use Modules\Otp\App\DTOS\OtpDTO;
@@ -51,11 +52,6 @@ class WhatsappAPI {
     }
 
 
-    // private function sendToDeveloper($message) {
-    //     $otpDTO = new OtpDTO();
-    //     $otpDTO->number = "994559884227";
-    //     $this->sendMessage($otpDTO,$message);
-    // }
 }
 
 

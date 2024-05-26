@@ -11,6 +11,7 @@ use Modules\Iptv\DTOS\CashbackDTO;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Modules\Iptv\DTOS\UserBindingDTO;
+use Modules\Iptv\Events\LineCreatedEvent;
 use Modules\Iptv\Models\ResellerTree;
 use Modules\Iptv\externalAPIs\LinesAPI;
 use Modules\Auth\App\Services\UserService;
@@ -36,13 +37,14 @@ class LineAction
     protected $packageAction;
     protected $cashbackService;
 
+    protected $whatsappSettingsAction;
     public function __construct( 
         CashbackService $cashbackService,
         UserBindingService $userBindingService,
         UserService $userService,
         PackageAction $packageAction,
         PackageService $packageService,
-        LineService $lineService, PackagesAPI $packagesAPI, LinesAPI $linesAPI)
+        LineService $lineService, PackagesAPI $packagesAPI, LinesAPI $linesAPI,WhatsappSettingsAction $whatsappSettingsAction)
     {
         $this->cashbackService = $cashbackService;
         $this->packageAction = $packageAction;
@@ -52,7 +54,7 @@ class LineAction
         $this->lineService = $lineService;
         $this->packageService = $packageService;
         $this->userBindingService = $userBindingService;
-
+        $this->whatsappSettingsAction = $whatsappSettingsAction;
     }
     public function getPackages()
     {
@@ -147,14 +149,17 @@ class LineAction
             $lineDTO->bouquets  = $selectedBouquets;
             $user = $this->userService->addUser($userDTO);
             $lineDTO->userId = $user->id;
-            $this->lineService->addLine($lineDTO);
+            $line = $this->lineService->addLine($lineDTO);
+            $this->whatsappSettingsAction->createSettings($user);
+            event(new LineCreatedEvent($line));
             $lineDTO->bouquets = $lineCreateRequest->bouquets_selected;
 
-
+            
 
 
             $lineDTO->ownerId = $this->userBindingService->getRemoteId(Auth::user()->id);
-            $remote_id  = $this->linesAPI->createLine($lineDTO)["data"]["id"];
+            // $remote_id  = $this->linesAPI->createLine($lineDTO)["data"]["id"];
+            $remote_id  = 4545;
 
             $userBindingDTO = new UserBindingDTO();
             $userBindingDTO->localId = $user->id;

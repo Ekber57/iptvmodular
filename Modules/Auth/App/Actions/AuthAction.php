@@ -32,10 +32,7 @@ class AuthAction
         $user = $this->userService->addUser($userDTO);
         event(new UserRegisterEvent($user));
         if (!Auth::check()) {
-            Auth::attempt([
-                'email' => $userDTO->email,
-                'password' => $userDTO->password,
-            ]);
+            Auth::login($user);
         }
         return redirect("/dashboard");
     }

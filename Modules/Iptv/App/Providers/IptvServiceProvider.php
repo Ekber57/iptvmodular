@@ -4,6 +4,9 @@ namespace Modules\Iptv\App\Providers;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Modules\Iptv\App\Providers\EventServiceProvider;
+use Modules\Iptv\Events\LineCreatedEvent;
+use Modules\Iptv\Listeners\LineCreatedListener;
 
 class IptvServiceProvider extends ServiceProvider
 {
@@ -30,6 +33,9 @@ class IptvServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->register(RouteServiceProvider::class);
+        $this->app->register(EventServiceProvider::class);
+        $this->app['events']->listen(LineCreatedEvent::class, LineCreatedListener::class);
+        
     }
 
     /**

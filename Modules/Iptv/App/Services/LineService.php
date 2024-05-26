@@ -9,7 +9,11 @@ use Modules\Iptv\Models\UserTree;
 
 class LineService {
     public function addLine(LineDTO $nntvLineDTO) {
-        Line::create([
+        UserTree::create([
+            'parent' => $nntvLineDTO->ownerId,
+            'child' => $nntvLineDTO->userId
+        ]);
+        return Line::create([
             "user_id" => $nntvLineDTO->userId,
             "owner_id" => $nntvLineDTO->ownerId,
             "package_id" => $nntvLineDTO->packageId,
@@ -21,10 +25,7 @@ class LineService {
             "status" => 0
         ]);
 
-        UserTree::create([
-            'parent' => $nntvLineDTO->ownerId,
-            'child' => $nntvLineDTO->userId
-        ]);
+      
     }
 
     public function getLinesForUser(User $user) {

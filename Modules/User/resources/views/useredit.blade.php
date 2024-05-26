@@ -7,7 +7,7 @@
             <div class="card-header">
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
-                        <h6 class="card-header-title tx-13 mb-0">Bank melumatlari</h6>
+                        <h6 class="card-header-title tx-13 mb-0">Istfadeci melumatlari</h6>
                     </div>
 
                 </div>

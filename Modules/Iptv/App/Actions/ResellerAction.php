@@ -27,12 +27,14 @@ class ResellerAction {
     protected $userBindingService;
     protected $packageAction;
     protected $cashbackService;
+    protected $whatsappSettingsAction;
+
     public function __construct(
         CashbackService $cashbackService,
         PackageAction $packageAction,
        UserAction $userAction,
         UserBindingService $userBindingService,
-        UserAPi $userAPI,  PackageService $packageService, ResellerService $resellerService, UserService $userService,PackagesAPI $packagesAPI)
+        UserAPi $userAPI,  PackageService $packageService, ResellerService $resellerService, UserService $userService,PackagesAPI $packagesAPI, WhatsappSettingsAction $whatsappSettingsAction)
     {
         $this->cashbackService =  $cashbackService;
         $this->userAction = $userAction;
@@ -43,6 +45,7 @@ class ResellerAction {
         $this->packageService = $packageService;
         $this->userAPI = $userAPI;
         $this->userBindingService = $userBindingService;
+        $this->whatsappSettingsAction  = $whatsappSettingsAction;
 
     }
 
@@ -58,7 +61,6 @@ class ResellerAction {
 
         return $this->userService->getUsersById($resellers);
     }
-
 
 public function addSubreseller(SubresellerCreateRequest $subresellerCreateRequest) {
     DB::beginTransaction();
@@ -112,6 +114,8 @@ public function addSubreseller(SubresellerCreateRequest $subresellerCreateReques
             $userDTO->password = $request->password;
             $userDTO->balance = $request->balance;
             $user = $this->userService->addUser($userDTO);
+            // ddd($user);
+            $this->whatsappSettingsAction->createSettings($user);
             $user->givePermissionTo("create subreseller");
             $user->givePermissionTo("create line");
             $user->givePermissionTo("create subreseller");

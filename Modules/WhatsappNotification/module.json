@@ -1,0 +1,11 @@
+{
+    "name": "WhatsappNotification",
+    "alias": "whatsappnotification",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\WhatsappNotification\\App\\Providers\\WhatsappNotificationServiceProvider"
+    ],
+    "files": []
+}
