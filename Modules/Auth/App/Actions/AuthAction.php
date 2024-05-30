@@ -1,12 +1,12 @@
 <?php
 namespace Modules\Auth\App\Actions;
 
+use App\Models\User;
 use GuzzleHttp\Client;
-use App\Events\UserRegisterEvent;
 use Modules\Auth\App\DTOS\UserDTO;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\Log;
+use Modules\User\Events\UserCreatedEvent;
 use Modules\Auth\App\Services\UserService;
 use Modules\Auth\App\Http\Requests\SignInRequest;
 use Modules\Auth\App\Http\Requests\RegisterRequest;
@@ -30,7 +30,8 @@ class AuthAction
         $userDTO->password = $request->password;
         $userDTO->balance = 0;
         $user = $this->userService->addUser($userDTO);
-        event(new UserRegisterEvent($user));
+        $admin = User::find(1);
+        event(new UserCreatedEvent($user,null,$admin));
         if (!Auth::check()) {
             Auth::login($user);
         }

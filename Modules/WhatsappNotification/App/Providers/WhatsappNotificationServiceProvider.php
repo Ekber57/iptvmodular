@@ -4,8 +4,10 @@ namespace Modules\WhatsappNotification\App\Providers;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Modules\User\Events\UserCreatedEvent;
 use Modules\WhatsappNotification\Events\SendWhatsappNotificationEvent;
 use Modules\WhatsappNotification\Listeners\WhatsappNotificationSendListner;
+use Modules\WhatsappNotification\Listeners\UserCreatedListenerForCreateWhastappBalance;
 
 class WhatsappNotificationServiceProvider extends ServiceProvider
 {
@@ -33,6 +35,7 @@ class WhatsappNotificationServiceProvider extends ServiceProvider
     {
         $this->app->register(RouteServiceProvider::class);
         $this->app['events']->listen(SendWhatsappNotificationEvent::class, WhatsappNotificationSendListner::class);
+        $this->app['events']->listen(UserCreatedEvent::class, UserCreatedListenerForCreateWhastappBalance::class);
     }
 
     /**

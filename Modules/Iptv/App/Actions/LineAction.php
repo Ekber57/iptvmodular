@@ -4,6 +4,7 @@ namespace Modules\Iptv\App\Actions;
 use Exception;
 use App\Models\User;
 use Illuminate\Support\Carbon;
+use Modules\Iptv\App\Services\ResellerService;
 use Modules\Iptv\DTOS\LineDTO;
 use Illuminate\Support\Facades\DB;
 use Modules\Auth\App\DTOS\UserDTO;
@@ -21,6 +22,7 @@ use Modules\Iptv\App\Services\PackageService;
 use Modules\Iptv\App\Services\CashbackService;
 use Modules\Iptv\App\Services\UserBindingService;
 use Modules\Iptv\App\Http\Requests\LineCreateRequest;
+use Modules\User\Events\UserCreatedEvent;
 
 
 
@@ -36,9 +38,10 @@ class LineAction
     protected $userBindingService;
     protected $packageAction;
     protected $cashbackService;
-
+    protected $resellerService;
     protected $whatsappSettingsAction;
     public function __construct( 
+        ResellerService $resellerService,
         CashbackService $cashbackService,
         UserBindingService $userBindingService,
         UserService $userService,
@@ -46,6 +49,7 @@ class LineAction
         PackageService $packageService,
         LineService $lineService, PackagesAPI $packagesAPI, LinesAPI $linesAPI,WhatsappSettingsAction $whatsappSettingsAction)
     {
+        $this->resellerService =  $resellerService;
         $this->cashbackService = $cashbackService;
         $this->packageAction = $packageAction;
         $this->userService = $userService;
@@ -151,7 +155,7 @@ class LineAction
             $lineDTO->userId = $user->id;
             $line = $this->lineService->addLine($lineDTO);
             $this->whatsappSettingsAction->createSettings($user);
-            event(new LineCreatedEvent($line));
+           
             $lineDTO->bouquets = $lineCreateRequest->bouquets_selected;
 
             
@@ -166,7 +170,12 @@ class LineAction
             $userBindingDTO->remoteId = $remote_id;
             $this->userBindingService->addBinding($userBindingDTO);
             $this->addCashback($lineCreateRequest);
-          
+
+
+            $parent = $this->userService->getUserById($this->resellerService->getParent(Auth::user()));
+            event(new UserCreatedEvent($user,Auth::user(),$parent));
+
+
             DB::commit();
             $data = ['message' => 'Istifadeci yardildi'];
 

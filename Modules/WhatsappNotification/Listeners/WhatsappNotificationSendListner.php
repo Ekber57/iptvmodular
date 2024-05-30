@@ -1,7 +1,7 @@
 <?php 
 namespace Modules\WhatsappNotification\Listeners;
+use Modules\Events\SendNotificationEvent;
 use Modules\WhatsappNotification\App\Services\WhatsappNotificationUserBalanceService;
-use Modules\WhatsappNotification\Events\SendWhatsappNotificationEvent;
 use Modules\WhatsappNotification\externalApis\WhatsappAPI;
 
 class WhatsappNotificationSendListner {
@@ -11,11 +11,12 @@ class WhatsappNotificationSendListner {
         $this->whatsappNotificationUserBalanceService = $whatsappNotificationUserBalanceService;
         $this->whatsappAPI = $whatsappAPI;
     }
-    public function handle(SendWhatsappNotificationEvent $sendWhatsappNotificationEvent) {
-        $dto = $sendWhatsappNotificationEvent->whatsappNotificationDTO;
-        $balance = $this->whatsappNotificationUserBalanceService->getBalance($dto->userId);
+    public function handle(SendNotificationEvent $sendNotificationEvent) {
+        $user = $sendNotificationEvent->user;
+        $balance = $this->whatsappNotificationUserBalanceService->getBalance($user->id);
         if($balance > 0) {
-            $this->whatsappAPI->sendMessage($dto);
+
+            $this->whatsappAPI->sendMessage($sendNotificationEvent->content,$user->phone);
         }
     }
 }

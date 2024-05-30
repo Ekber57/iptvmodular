@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Listeners;
+namespace Modules\Payment\Listeners;
 
-use App\Events\ManualPaymentRequestEvent;
 use Modules\Auth\App\Services\UserService;
 use Modules\Iptv\App\Services\ResellerService;
-use Modules\Notification\App\Services\NotificationService;
 use Modules\Notification\DTOS\NotificationDTO;
+use Modules\Payment\Events\ManualPaymentRequestEvent;
+use Modules\Notification\App\Services\NotificationService;
 
 class SendNotificationWhenManualPaymentListener
 {

@@ -5,6 +5,13 @@ use Modules\WhatsappNotification\DTOS\WhatsappNotificationUserBalanceDTO;
 use Modules\WhatsappNotification\Models\WhatsappNotificationBalance;
 
 class WhatsappNotificationUserBalanceService {
+
+    public function createPurse($userId) {
+        WhatsappNotificationBalance::create([
+            'user_id' => $userId,
+            'balance' => 0
+        ]);
+    }
     public function addBalance(WhatsappNotificationUserBalanceDTO $whatsappNotificationUserBalanceDTO) {
         $user = WhatsappNotificationBalance::where('user_id',$whatsappNotificationUserBalanceDTO->userId)->first();
         $user->balance = $user->balance + $whatsappNotificationUserBalanceDTO->balance;

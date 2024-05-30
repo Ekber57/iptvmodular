@@ -16,6 +16,7 @@ use Modules\Iptv\App\Services\ResellerService;
 use Modules\Iptv\App\Services\UserBindingService;
 use Modules\Iptv\App\Http\Requests\ResellerCreateRequest;
 use Modules\Iptv\App\Http\Requests\SubresellerCreateRequest;
+use Modules\User\Events\UserCreatedEvent;
 
 class ResellerAction {
     protected $userService;
@@ -85,7 +86,9 @@ public function addSubreseller(SubresellerCreateRequest $subresellerCreateReques
         $resellerDTO->parent = $parent->id;
         $resellerDTO->child = $user->id;
         $reseller = $this->resellerService->addSubreseller($resellerDTO);
+        $parent = $this->userService->getUserById( $this->resellerService->getParent(Auth::user()->id));
         $this->packageAction->createPackageForUser($subresellerCreateRequest,$user);
+        event(new UserCreatedEvent($user,Auth::user(),$parent));
         DB::commit();
         $data = ['message' => 'Subreseller yardildi'];
         // Flash the data to the session
@@ -114,11 +117,11 @@ public function addSubreseller(SubresellerCreateRequest $subresellerCreateReques
             $userDTO->password = $request->password;
             $userDTO->balance = $request->balance;
             $user = $this->userService->addUser($userDTO);
-            // ddd($user);
             $this->whatsappSettingsAction->createSettings($user);
             $user->givePermissionTo("create subreseller");
             $user->givePermissionTo("create line");
             $user->givePermissionTo("create subreseller");
+            
             $this->cashbackService->createPurse($user);
             $resellerDTO = new ResellerDTO();
             $parent = Auth::user();
@@ -132,7 +135,7 @@ public function addSubreseller(SubresellerCreateRequest $subresellerCreateReques
             $resellerDTO->groupId = $request->group_id;
             $this->userBindingService->addBinding($userBindingDTO);
             $reseller = $this->resellerService->addReseller($resellerDTO);
-         
+            event(new UserCreatedEvent($user,null,null,false));
             DB::commit();
             $data = ['message' => 'Reseller yardildi'];
 

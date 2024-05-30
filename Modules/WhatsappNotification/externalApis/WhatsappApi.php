@@ -2,12 +2,10 @@
 namespace Modules\WhatsappNotification\externalApis;
 
 use GuzzleHttp\Client;
-use Illuminate\Support\Facades\Log;
-use Modules\WhatsappNotification\DTOS\WhatsappNotificationDTO;
 
 class WhatsappAPI {
    
-    public function sendMessage(WhatsappNotificationDTO $whatsappNotificationDTO)
+    public function sendMessage($content,$to)
     {
      
         // Initialize Guzzle client
@@ -22,8 +20,8 @@ class WhatsappAPI {
             'form_params' => [
                 'apikey' => 'ADBD75CAC20965C6DEEE81C0857E7A7D',
                 'session' => '12179127813',
-                'msg' => $whatsappNotificationDTO->message   ,
-                'to'=> "994".substr($whatsappNotificationDTO->phone,1)
+                'msg' => $content   ,
+                'to'=> "994".substr($to,1)
             ]
         ];
 

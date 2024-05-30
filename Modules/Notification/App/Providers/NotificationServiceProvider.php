@@ -4,6 +4,8 @@ namespace Modules\Notification\App\Providers;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Modules\Events\SendNotificationEvent;
+use Modules\Notification\Listeners\SendLocalNotificationListener;
 
 class NotificationServiceProvider extends ServiceProvider
 {
@@ -30,6 +32,7 @@ class NotificationServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->register(RouteServiceProvider::class);
+        $this->app['events']->listen(SendNotificationEvent::class, SendLocalNotificationListener::class);
     }
 
     /**

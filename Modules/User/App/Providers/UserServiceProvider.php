@@ -4,6 +4,8 @@ namespace Modules\User\App\Providers;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Modules\User\Events\UserCreatedEvent;
+use Modules\User\Listeners\UserCreatedEventListener;
 
 class UserServiceProvider extends ServiceProvider
 {
@@ -30,6 +32,7 @@ class UserServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->register(RouteServiceProvider::class);
+        $this->app['events']->listen(UserCreatedEvent::class, UserCreatedEventListener::class);
     }
 
     /**
