@@ -39,7 +39,6 @@ class LineAction
     protected $packageAction;
     protected $cashbackService;
     protected $resellerService;
-    protected $whatsappSettingsAction;
     public function __construct( 
         ResellerService $resellerService,
         CashbackService $cashbackService,
@@ -47,7 +46,7 @@ class LineAction
         UserService $userService,
         PackageAction $packageAction,
         PackageService $packageService,
-        LineService $lineService, PackagesAPI $packagesAPI, LinesAPI $linesAPI,WhatsappSettingsAction $whatsappSettingsAction)
+        LineService $lineService, PackagesAPI $packagesAPI, LinesAPI $linesAPI)
     {
         $this->resellerService =  $resellerService;
         $this->cashbackService = $cashbackService;
@@ -58,13 +57,12 @@ class LineAction
         $this->lineService = $lineService;
         $this->packageService = $packageService;
         $this->userBindingService = $userBindingService;
-        $this->whatsappSettingsAction = $whatsappSettingsAction;
     }
     public function getPackages()
     {
         $customPackages = [];
         $key = env("priceKey");
-        // if(Auth::user()->hasPermissionTo("create subreseller")) {
+        // if(Auth::user()->hasPermissionTo("iptv create subreseller")) {
         //     $packages = $this->packageAction->getPackagesForSubreseller();
          
         //     foreach($packages as $package) {
@@ -76,7 +74,7 @@ class LineAction
         // }
   
  
-        if(Auth::user()->hasPermissionTo("create subreseller")) {
+        if(Auth::user()->hasPermissionTo("iptv create subreseller")) {
             $packages = $this->packagesAPI->getPackages();
 
         foreach($packages as $package) {
@@ -154,7 +152,6 @@ class LineAction
             $user = $this->userService->addUser($userDTO);
             $lineDTO->userId = $user->id;
             $line = $this->lineService->addLine($lineDTO);
-            $this->whatsappSettingsAction->createSettings($user);
            
             $lineDTO->bouquets = $lineCreateRequest->bouquets_selected;
 
@@ -172,7 +169,7 @@ class LineAction
             $this->addCashback($lineCreateRequest);
 
 
-            $parent = $this->userService->getUserById($this->resellerService->getParent(Auth::user()));
+            $parent = $this->userService->getUserById($this->resellerService->getParent(Auth::user()->id));
             event(new UserCreatedEvent($user,Auth::user(),$parent));
 
 
@@ -190,7 +187,7 @@ class LineAction
     }
 
     public function addCashback(lineCreateRequest $req) {
-       if(!Auth::user()->hasPermissionTo("create subreseller")){
+       if(!Auth::user()->hasPermissionTo("iptv create subreseller")){
         $parent = ResellerTree::where("child","=",Auth::user()->id)->first();
         $parent = User::find($parent->parent);
         $package = $this->packageService->getPackage($req->package_id);

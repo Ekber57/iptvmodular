@@ -6,5 +6,6 @@
     "Notification": true,
     "User": true,
     "Settings": true,
-    "WhatsappNotification": true
+    "WhatsappNotification": true,
+    "ModuleConf": true
 }

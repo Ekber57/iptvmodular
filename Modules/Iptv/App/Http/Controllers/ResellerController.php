@@ -22,7 +22,7 @@ class ResellerController extends Controller {
 
 
     public function getResellers(ResellerAction $resellerAction) {
-        $this->authorize("create reseller");
+        $this->authorize("iptv create reseller");
 
         return view("iptv::resellers",[
             "users" => $resellerAction->getResellers()
@@ -30,7 +30,7 @@ class ResellerController extends Controller {
     }
 
     public function getSubresellers(ResellerAction $resellerAction) {
-        $this->authorize("create subreseller");
+        $this->authorize("iptv create subreseller");
         return view("iptv::subresellers",[
             "users" => $resellerAction->getSubresellers()
         ]);
@@ -46,12 +46,12 @@ class ResellerController extends Controller {
 
     public function storeReseller(ResellerAction $resellerAction, ResellerCreateRequest $resellerCreateRequest) 
     {
-        $this->authorize("create reseller");
+        $this->authorize("iptv create reseller");
         return $resellerAction->addReseller($resellerCreateRequest);
     }
     public function storeSubreseller(ResellerAction $resellerAction, SubresellerCreateRequest $subresellerCreateRequest) 
     {
-        $this->authorize("create subreseller");
+        $this->authorize("iptv create subreseller");
         return $resellerAction->addSubreseller($subresellerCreateRequest);
     }
 

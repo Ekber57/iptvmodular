@@ -4,12 +4,9 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Modules\Iptv\App\Actions\LineAction;
-use Modules\Iptv\App\Http\Controllers\WhatsaapSettingsCotroller;
 use Modules\Iptv\App\Services\LineService;
 use Modules\Iptv\externalAPIs\PackagesAPI;
 use Modules\Iptv\App\Actions\OnlineLineAction;
-use Modules\Iptv\App\Services\ResellerService;
-use Modules\Iptv\App\Services\UserBindingService;
 use Modules\Iptv\App\Http\Controllers\IptvController;
 use Modules\Iptv\App\Http\Controllers\LineController;
 use Modules\Iptv\App\Http\Controllers\ResellerController;
@@ -159,7 +156,7 @@ Route::middleware(['auth'])->group(function () {
 
 
 
-    Route::get('/iptv/whatsaap/settings',[WhatsaapSettingsCotroller::class,"showSettings"]);
+
     
 });
 

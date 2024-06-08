@@ -1,0 +1,11 @@
+{
+    "name": "ModuleConf",
+    "alias": "moduleconf",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\ModuleConf\\App\\Providers\\ModuleConfServiceProvider"
+    ],
+    "files": []
+}

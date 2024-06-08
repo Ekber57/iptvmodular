@@ -28,14 +28,13 @@ class ResellerAction {
     protected $userBindingService;
     protected $packageAction;
     protected $cashbackService;
-    protected $whatsappSettingsAction;
 
     public function __construct(
         CashbackService $cashbackService,
         PackageAction $packageAction,
        UserAction $userAction,
         UserBindingService $userBindingService,
-        UserAPi $userAPI,  PackageService $packageService, ResellerService $resellerService, UserService $userService,PackagesAPI $packagesAPI, WhatsappSettingsAction $whatsappSettingsAction)
+        UserAPi $userAPI,  PackageService $packageService, ResellerService $resellerService, UserService $userService,PackagesAPI $packagesAPI)
     {
         $this->cashbackService =  $cashbackService;
         $this->userAction = $userAction;
@@ -46,7 +45,6 @@ class ResellerAction {
         $this->packageService = $packageService;
         $this->userAPI = $userAPI;
         $this->userBindingService = $userBindingService;
-        $this->whatsappSettingsAction  = $whatsappSettingsAction;
 
     }
 
@@ -74,7 +72,7 @@ public function addSubreseller(SubresellerCreateRequest $subresellerCreateReques
         $userDTO->password = $subresellerCreateRequest->password;
         $userDTO->balance = $subresellerCreateRequest->balance;
         $user = $this->userService->addUser($userDTO);
-        $user->givePermissionTo("create line");
+        $user->givePermissionTo("iptv create line");
         $resellerDTO = new ResellerDTO();
         $parent = Auth::user();
         $this->decreaseParentBalance($parent,$subresellerCreateRequest->balance);
@@ -117,10 +115,9 @@ public function addSubreseller(SubresellerCreateRequest $subresellerCreateReques
             $userDTO->password = $request->password;
             $userDTO->balance = $request->balance;
             $user = $this->userService->addUser($userDTO);
-            $this->whatsappSettingsAction->createSettings($user);
-            $user->givePermissionTo("create subreseller");
-            $user->givePermissionTo("create line");
-            $user->givePermissionTo("create subreseller");
+            $user->givePermissionTo("iptv create subreseller");
+            $user->givePermissionTo("iptv create line");
+            $user->givePermissionTo("iptv create subreseller");
             
             $this->cashbackService->createPurse($user);
             $resellerDTO = new ResellerDTO();

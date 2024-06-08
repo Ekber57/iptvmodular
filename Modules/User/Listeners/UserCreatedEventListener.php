@@ -16,7 +16,7 @@ class UserCreatedEventListener
     
            else  if ($userCreatedEvent->currentUser->id != 1 ) {
                 $type = "istifadeci";
-                if($userCreatedEvent->newUser->hasPermissionTo("create line")) {
+                if($userCreatedEvent->newUser->hasPermissionTo("iptv create line")) {
                     $type = "subreseller";
                 }
                 $content = "Sizin referaliniz olan ".$userCreatedEvent->currentUser->name." yeni ".$userCreatedEvent->newUser->name . " adli ".$type." yaratdi. Istifadecinin username ve telefonu: ".$userCreatedEvent->newUser->username." / ".$userCreatedEvent->newUser->phone;

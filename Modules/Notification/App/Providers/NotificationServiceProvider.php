@@ -5,7 +5,9 @@ namespace Modules\Notification\App\Providers;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Modules\Events\SendNotificationEvent;
+use Modules\Notification\Listeners\CreateExternalNotificationProviderSettingsListener;
 use Modules\Notification\Listeners\SendLocalNotificationListener;
+use Modules\User\Events\UserCreatedEvent;
 
 class NotificationServiceProvider extends ServiceProvider
 {
@@ -33,6 +35,7 @@ class NotificationServiceProvider extends ServiceProvider
     {
         $this->app->register(RouteServiceProvider::class);
         $this->app['events']->listen(SendNotificationEvent::class, SendLocalNotificationListener::class);
+        $this->app['events']->listen(UserCreatedEvent::class, CreateExternalNotificationProviderSettingsListener::class);
     }
 
     /**

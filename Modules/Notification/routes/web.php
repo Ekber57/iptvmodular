@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\Notification\App\Http\Controllers\NotificationSwitchController;
 use Modules\Notification\App\Services\NotificationService;
 use Modules\Notification\Models\Notification;
 use Modules\Notification\App\Http\Controllers\NotificationController;
@@ -29,3 +30,5 @@ Route::get('/read_notification/{notification}',function(Notification $notificati
     $notification->save();
     return view("notification::readnotification",["notification" => $notification]);
 });
+Route::get('notificationmodule/settings',[NotificationSwitchController::class,"showNotifications"])->name('showNotificationSettings');
+Route::post('notificationmodule/settings',[NotificationSwitchController::class,"saveNotificationParametrs"]);

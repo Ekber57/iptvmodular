@@ -1,5 +1,6 @@
 {
     "name": "Iptv",
+    "display_name" : "Iptv",
     "alias": "iptv",
     "description": "",
     "keywords": [],
@@ -9,5 +10,38 @@
         "Modules\\Iptv\\App\\Providers\\EventServiceProvider"
         
     ],
-    "files": []
+    "files": [],
+    "isEnabled": true,
+    "links" : [
+        {
+            "title": "Reseller yarat",
+            "url": "/reseller/create",
+            "permission": "iptv create reseller"
+        },
+        {
+            "title": "Resellerler",
+            "url": "/reseller/get_resellers",
+            "permission": "iptv create reseller"
+        },
+        {
+            "title": "Subreseller yarat",
+            "url": "/subreseller/create",
+            "permission": "iptv create subreseller"
+        },
+        {
+            "title": "Subresellerler",
+            "url": "/reseller/get_subresellers",
+            "permission": "iptv create subreseller"
+        },
+        {
+            "title": "Istifadeciler",
+            "url": "/reseller/lines/",
+            "permission": "iptv create line"
+        },
+        {
+            "title": "Istifadeci yarat",
+            "url": "/reseller/lines/create",
+            "permission": "iptv create line"
+        }
+    ]
 }

@@ -1,5 +1,6 @@
 {
     "name": "Auth",
+    "display_name" : "Auth",
     "alias": "auth",
     "description": "",
     "keywords": [],
@@ -7,5 +8,13 @@
     "providers": [
         "Modules\\Auth\\App\\Providers\\AuthServiceProvider"
     ],
-    "files": []
+    "files": [],
+    "isEnabled": false,
+    "links" : [
+        {
+            "title": "Reseller yarat",
+            "url": "/reseller/create",
+            "permission": "create reseller"
+        }
+    ]
 }
